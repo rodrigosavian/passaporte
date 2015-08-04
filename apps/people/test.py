@@ -2,12 +2,14 @@
 import unittest
 
 from sqlalchemy import Column
+from sqlalchemy.orm.query import Query
 
 from models import Person
 
 
 class PersonModelTest(unittest.TestCase):
     def setUp(self):
+        self.model_class = Person
         p = Person()
         p.id = 1
         p.username = 'rodrigosavian'
@@ -34,6 +36,9 @@ class PersonModelTest(unittest.TestCase):
             column, value = v
             self.assertEqual(type(column), Column)
             self.assertEqual(value, getattr(self.person, k))
+
+    def test_return_objects_method(self):
+        self.assertEqual(type(self.model_class.objects()), Query)
 
 if __name__ == '__main__':
     unittest.main()
