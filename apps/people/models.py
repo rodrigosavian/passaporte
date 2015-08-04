@@ -14,6 +14,10 @@ class Person(Base):
     name = Column(String(255), nullable=False)
     gender = Column(String(20), nullable=False)
 
-
     def __repr__(self):
         return u'<Person(%s)>' % self.facebook_id
+
+    def _get_fields(self):
+        return dict((m.key, (m, getattr(self, m.key)))
+                for m in self.__table__.columns)
+    fields = property(_get_fields)
