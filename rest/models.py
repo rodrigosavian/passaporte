@@ -24,8 +24,22 @@ class Base(object):
                 for m in self.__table__.columns)
     fields = property(_get_fields)
 
+    def save(self, *args, **kwargs):
+        if not self.id:
+            db.add(self)
+        db.commit()
+
+    def delete(self, *args, **kwargs):
+        try:
+            db.delete(self)
+            db.commit()
+        except AttributeError, e:
+            raise e
+        else:
+            return None
+
     @classmethod
-    def objects(cls):
+    def query(cls):
         return db.query(cls)
 
 Model = declarative_base(cls=Base)
