@@ -8,6 +8,6 @@ class Person(Model):
     tablename = 'people'
 
     username = Column(String(30), nullable=False)
-    facebook_id = Column(String(50), nullable=False)
+    facebook_id = Column(String(50), unique=True)
     name = Column(String(255), nullable=False)
     gender = Column(String(20), nullable=False)
