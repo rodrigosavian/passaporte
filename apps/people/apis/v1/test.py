@@ -44,11 +44,11 @@ class PersonSerializerTest(unittest.TestCase):
             'gender': 'gender'})
 
     def test_get_data_with_object(self):
-        self.assertEqual(self.serializer_object.data, json.dumps({
+        self.assertEqual(self.serializer_object.data, {
             'username': u'rodrigocesar.savian1',
             'facebookId': '1000031941660551',
             'name': u'Rodrigo Cesar Savian1',
-            'gender': u'male'}))
+            'gender': u'male'})
 
     def test_get_data_with_list(self):
         l = []
@@ -60,7 +60,7 @@ class PersonSerializerTest(unittest.TestCase):
                 'gender': u'male'})
 
         serializer_list = self.serializer_class(self.object_list)
-        self.assertEqual(serializer_list.data, json.dumps(l))
+        self.assertEqual(serializer_list.data, l)
 
 if __name__ == '__main__':
     unittest.main()

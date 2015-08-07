@@ -53,7 +53,7 @@ class Serializer(object):
         else:
             object = type(self).object_to_dict(self.instance)
 
-        return json.dumps(object)
+        return object
     data = property(_get_data)
 
     @classmethod

@@ -6,7 +6,7 @@ class ListHandlerMixin(object):
     def list(self, *args, **kwargs):
         object_list = self.get_object_list()
         serializer = self.get_serializer(instance=object_list)
-        self.write(serializer.data)
+        self.write(json.dumps(serializer.data))
 
 
 class CreateHandlerMixin(object):
@@ -30,4 +30,4 @@ class RetrieveHandlerMixin(object):
         self.id = id
         object = self.get_object()
         serializer = self.get_serializer(instance=object)
-        self.write(serializer.data)
+        self.write(json.dumps(serializer.data))
