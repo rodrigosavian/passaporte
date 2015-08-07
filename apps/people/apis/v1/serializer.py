@@ -41,7 +41,7 @@ class PersonSerializer(Serializer):
         facebook_object = r.json()
         object = self.model_class()
         object.facebook_id = facebook_id
-        object.username = facebook_object.get('first_name')
+        object.username = facebook_object.get('username', '')
         object.name = facebook_object.get('name')
         object.gender = facebook_object.get('gender')
         object.save()
