@@ -34,15 +34,15 @@ class PersonListAPITest(AsyncHTTPTestCase):
 
     def test_without_limit_person_list(self):
         response = self.fetch('/person/')
-        body = '[{"username": "rodrigocesar.savian0", "facebookId": "1000031941660550", "name": "Rodrigo Cesar Savian0", "gender": "male"}, {"username": "rodrigocesar.savian1", "facebookId": "1000031941660551", "name": "Rodrigo Cesar Savian1", "gender": "male"}, {"username": "rodrigocesar.savian2", "facebookId": "1000031941660552", "name": "Rodrigo Cesar Savian2", "gender": "male"}, {"username": "rodrigocesar.savian3", "facebookId": "1000031941660553", "name": "Rodrigo Cesar Savian3", "gender": "male"}, {"username": "rodrigocesar.savian4", "facebookId": "1000031941660554", "name": "Rodrigo Cesar Savian4", "gender": "male"}]'
+        body = '{"limit": 5, "list": [{"username": "rodrigocesar.savian0", "facebookId": "1000031941660550", "name": "Rodrigo Cesar Savian0", "gender": "male"}, {"username": "rodrigocesar.savian1", "facebookId": "1000031941660551", "name": "Rodrigo Cesar Savian1", "gender": "male"}, {"username": "rodrigocesar.savian2", "facebookId": "1000031941660552", "name": "Rodrigo Cesar Savian2", "gender": "male"}, {"username": "rodrigocesar.savian3", "facebookId": "1000031941660553", "name": "Rodrigo Cesar Savian3", "gender": "male"}, {"username": "rodrigocesar.savian4", "facebookId": "1000031941660554", "name": "Rodrigo Cesar Savian4", "gender": "male"}]}'
 
         dict_object = json.loads(response.body)
         self.assertEqual(response.body, body)
-        self.assertEqual(len(dict_object), 5)
+        self.assertEqual(len(dict_object['list']), 5)
 
     def test_limit_two_person_list(self):
         response = self.fetch('/person/?limit=2')
-        body = '[{"username": "rodrigocesar.savian0", "facebookId": "1000031941660550", "name": "Rodrigo Cesar Savian0", "gender": "male"}, {"username": "rodrigocesar.savian1", "facebookId": "1000031941660551", "name": "Rodrigo Cesar Savian1", "gender": "male"}]'
+        body = '{"limit": 5, "list": [{"username": "rodrigocesar.savian0", "facebookId": "1000031941660550", "name": "Rodrigo Cesar Savian0", "gender": "male"}, {"username": "rodrigocesar.savian1", "facebookId": "1000031941660551", "name": "Rodrigo Cesar Savian1", "gender": "male"}]}'
 
         dict_object = json.loads(response.body)
         self.assertEqual(response.code, 200)

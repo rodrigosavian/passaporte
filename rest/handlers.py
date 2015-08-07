@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import copy
+
 from tornado.web import RequestHandler
 
 from rest import mixins
@@ -14,9 +16,13 @@ class BaseRequestHandler(RequestHandler):
     def get_queryset(self):
         return self.model.query().filter()
 
+    def set_count(self, queryset):
+        self.count = copy.copy(queryset).count()
+
     def get_object_list(self):
         queryset = self.get_queryset()
 
+        self.set_count(queryset)
         limit = self.get_limit()
         if limit:
             queryset = queryset.limit(limit)
