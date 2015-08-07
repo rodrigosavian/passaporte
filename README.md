@@ -12,14 +12,14 @@ Ubuntu: `apt-get install redis-server`
 
 OSX: `brew install redis`
 
-### Criar nova/ativar env e instalar requirements.txt
+### Criar, ativar env e instalar requirements.txt
 `pip install -r requirements.txt`
 
 ### Configurar banco de dados no arquivo settings.py
 `mysql://<user>:<password>@<host>/<db>`
 
 ### Criar banco de dados
-`python -v createdb.py`
+`python createdb.py`
 
 ### Testes
 `python -m apps.people.test`
@@ -54,11 +54,11 @@ Crie uma app teste no Facebook para este passo:
  - oportunidade
 
 ### Pontos negativos
- - tempo
  - pouco teste
+ - poderia ter ficado melhor
 
 ### Balanço
  - optei por tentar desenvolver uma lib rest para utilizar no projeto e mostrar um pouco de codigo
- - poderia ter usado frameworks que resolveriam todo o trabalho: python-eve, flask-restful, django-restframework.
- - tornado bem fácil, rápido. Gostei bastante.
+ - poderia ter utilizado frameworks que resolveriam todo o trabalho: python-eve, flask-restful, django-restframework.
+ - tornado é bem fácil e rápido. Gostei bastante.
  - Obrigado!
