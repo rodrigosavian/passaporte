@@ -16,3 +16,4 @@ class PersonListAPI(ListCreateRequestHandler):
 class PersonRetrieveAPI(RetrieveRequestHandler):
     model = Person
     serializer_class = PersonSerializer
+    field_id = 'facebook_id'

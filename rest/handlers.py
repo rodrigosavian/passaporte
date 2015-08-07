@@ -12,6 +12,7 @@ class BaseRequestHandler(RequestHandler):
     model = None
     serializer_class = None
     limit = None
+    field_id = None
 
     def get_queryset(self):
         return self.model.query().filter()
@@ -31,7 +32,7 @@ class BaseRequestHandler(RequestHandler):
 
     def get_object(self):
         queryset = self.get_queryset()
-        return get_object_or_404(queryset, self.id)
+        return get_object_or_404(self.model, queryset, self.field_id, self.id)
 
     def get_serializer(self, *args, **kwargs):
         return self.serializer_class(*args, **kwargs)
