@@ -1,12 +1,48 @@
 # -*- coding: utf-8 -*-
 import json
 
+from tornado.web import HTTPError
+
 
 class Serializer(object):
     mapped_fields = None
+    model_class = None
 
-    def __init__(self, instance):
+    def __init__(self, instance=None, body=None):
         self.instance = instance
+        self.errors = {}
+
+        if body:
+            self.data_dict = self.build_data_dict(body)
+
+    def build_data_dict(self, body):
+        d = {}
+        for k, v in body.items():
+            try:
+                field_model = self.mapped_fields[k]
+            except KeyError, e:
+                raise HTTPError(400)
+
+            if isinstance(v, list):
+                v = v.pop()
+            d[k] = (field_model, v)
+        return d
+
+    def is_valid(self):
+        for f in self.mapped_fields.keys():
+            clean = getattr(self, 'clean_%s' % f, None)
+            if callable(clean):
+                clean()
+
+        if self.errors:
+            return False
+        return True
+
+    def set_error(self, field, error):
+        self.errors[field] = error
+
+    def save_model(self):
+        self.instance.save()
 
     def _get_data(self):
         if isinstance(self.instance, list):

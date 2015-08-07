@@ -42,6 +42,18 @@ class ListRequestHandler(
     def get(self, *args, **kwargs):
         return self.list(*args, **kwargs)
 
+class CreateRequestHandler(
+        mixins.CreateHandlerMixin,
+        BaseRequestHandler):
+
+    def post(self, *args, **kwargs):
+        return self.create(*args, **kwargs)
+
+class ListCreateRequestHandler(
+        ListRequestHandler,
+        CreateRequestHandler):
+    pass
+
 
 class RetrieveRequestHandler(
         mixins.RetrieveHandlerMixin,
