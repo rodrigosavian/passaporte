@@ -2,6 +2,8 @@
 import json
 import unittest
 
+from settings import db
+
 from apps.people.models import Person
 
 from serializer import PersonSerializer
@@ -12,6 +14,9 @@ class PersonSerializerTest(unittest.TestCase):
     serializer_class = PersonSerializer
 
     def setUp(self):
+        db.query(self.model_class).delete()
+        db.commit()
+
         self.object_list = []
         for x in range(1, 5):
             p = self.model_class(
@@ -25,6 +30,9 @@ class PersonSerializerTest(unittest.TestCase):
         self.serializer_object = self.serializer_class(self.object)
 
     def tearDown(self):
+        db.query(self.model_class).delete()
+        db.commit()
+
         del self.object
         del self.object_list
 

@@ -13,6 +13,9 @@ class PersonModelTest(unittest.TestCase):
     model_class = Person
 
     def setUp(self):
+        db.query(self.model_class).delete()
+        db.commit()
+
         for x in range(5):
             p = self.model_class(
                     username=u'rodrigocesar.savian%s' % x,

@@ -15,6 +15,7 @@ class PersonListAPITest(AsyncHTTPTestCase):
     def get_app(self):
         # first clear all
         db.query(self.model_class).delete()
+        db.commit()
 
         for x in range(5):
             p = self.model_class(
@@ -27,6 +28,11 @@ class PersonListAPITest(AsyncHTTPTestCase):
         self.object_list = db.query(self.model_class).all()
         self.object = self.object_list[0]
         return app.make_app_test()
+
+    def tearDown(self):
+        super(type(self), self).tearDown()
+        db.query(self.model_class).delete()
+        db.commit()
 
     def test_status_code_person_list(self):
         response = self.fetch('/person/')
