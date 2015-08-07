@@ -57,3 +57,11 @@ class PersonListAPITest(AsyncHTTPTestCase):
     def test_destroy_person(self):
         response = self.fetch('/person/1000031941660550/', method='DELETE')
         self.assertEqual(response.code, 204)
+
+    def test_create_config_facebook_client_id(self):
+        response = self.fetch('/config/', method='POST', body='facebook_client_id=400279633374331')
+        self.assertEqual(response.code, 201)
+
+    def test_create_config_facebook_client_secret(self):
+        response = self.fetch('/config/', method='POST', body='facebook_client_secret=52919c742c1a28913ca1e795ab7c41b9')
+        self.assertEqual(response.code, 201)
