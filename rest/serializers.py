@@ -44,6 +44,12 @@ class Serializer(object):
     def save_model(self):
         self.instance.save()
 
+    def delete_model(self):
+        try:
+            self.instance.delete()
+        except:
+            raise HTTPError(400)
+
     def _get_data(self):
         if isinstance(self.instance, list):
             l = []

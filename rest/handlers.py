@@ -68,3 +68,17 @@ class RetrieveRequestHandler(
 
     def get(self, id, *args, **kwargs):
         return self.retrieve(id, *args, **kwargs)
+
+
+class DestroyRequestHandler(
+        mixins.DestroyHandlerMixin,
+        BaseRequestHandler):
+
+    def delete(self, id, *args, **kwargs):
+        return self.destroy(id, *args, **kwargs)
+
+
+class RetrieveDestroyRequestHandler(
+        RetrieveRequestHandler,
+        DestroyRequestHandler):
+    pass

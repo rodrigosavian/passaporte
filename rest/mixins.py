@@ -31,3 +31,12 @@ class RetrieveHandlerMixin(object):
         object = self.get_object()
         serializer = self.get_serializer(instance=object)
         self.write(json.dumps(serializer.data))
+
+class DestroyHandlerMixin(object):
+    def destroy(self, id, *args, **kwargs):
+        self.id = id
+        object = self.get_object()
+        serializer = self.get_serializer(instance=object)
+        serializer.delete_model()
+        self.set_status(204)
+        self.write('')

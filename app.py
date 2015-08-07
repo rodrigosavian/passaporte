@@ -2,14 +2,13 @@
 import tornado.ioloop
 import tornado.web
 
-from apps.people.apis.v1.api import PersonListAPI
-from apps.people.apis.v1.api import PersonRetrieveAPI
+from apps.people.apis.v1.api import PersonListCreateAPI
+from apps.people.apis.v1.api import PersonRetrieveDestroyAPI
 
 
 application = tornado.web.Application([
-    (r'/person/$',  PersonListAPI),
-    (r'/person/(\d+)/$',  PersonRetrieveAPI),
-
+    (r'/person/$',  PersonListCreateAPI),
+    (r'/person/(\d+)/$',  PersonRetrieveDestroyAPI),
 ])
 
 def make_app_test():

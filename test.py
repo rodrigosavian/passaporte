@@ -50,5 +50,10 @@ class PersonListAPITest(AsyncHTTPTestCase):
         self.assertEqual(len(dict_object), 2)
 
     def test_create_person(self):
+        # use a valid facebookId
         response = self.fetch('/person/', method='POST', body='facebookId=100003194166055')
         self.assertEqual(response.code, 201)
+
+    def test_destroy_person(self):
+        response = self.fetch('/person/1000031941660550/', method='DELETE')
+        self.assertEqual(response.code, 204)
